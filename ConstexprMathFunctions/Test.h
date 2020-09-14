@@ -8,6 +8,17 @@ namespace ConstexprMathFunctions
 {
 	using namespace Function;
 
+	template <class F>
+	void Print()
+	{
+		using    DerF = typename    F::Derivative;
+		using DerDerF = typename DerF::Derivative;
+
+		std::cout << "  f(x) = ";       F::Print(); std::cout << std::endl;
+		std::cout << " f'(x) = ";    DerF::Print(); std::cout << std::endl;
+		std::cout << "f''(x) = "; DerDerF::Print(); std::cout << std::endl;
+	}
+
 	void Test1()
 	{
 		// "Строим" на этапе компиляции функцию f(x) = x*x + 3*(2 + x)
@@ -19,7 +30,7 @@ namespace ConstexprMathFunctions
 
 		// Знаем на этапе компиляции, что f(2) == 12
 		static_assert(F::f(2) == 16, "Incorrect value");
-		
+
 
 		// Возьмем производную этой функции
 		// f'(x) = 2*x + 3
@@ -40,8 +51,27 @@ namespace ConstexprMathFunctions
 		static_assert(DerDerF::IdenticallyValue == 2, "DerDerF must be equal 2");
 
 		// Ну а тут можно запустить прогу и посмотреть принты
-		std::cout << "  f(x) = ";       F::Print(); std::cout << std::endl;
-		std::cout << " f'(x) = ";    DerF::Print(); std::cout << std::endl;
-		std::cout << "f''(x) = "; DerDerF::Print(); std::cout << std::endl;
+		Print<F>();
+	}
+
+	void Test2()
+	{
+		// f(x) = x^4 + 3*x^3 + 5*x^2 + 3
+		//using F = SumMany<Constant<3>, Constant<4>>::F;
+		using F4 = Pow<4>;
+		using F3 = MulConst<3, Pow<3>>;
+		using F2 = MulConst<5, Pow<2>>;
+		using F0 = Constant<3>;
+
+		using F = Sum<F4, Sum<F3, Sum<F2, F0> > >;
+		
+		Print<F>();
+	}
+
+	void Test3()
+	{
+		using F = Sum<X, Sum<Constant<3>, X>>;
+
+		Print<F>();
 	}
 }

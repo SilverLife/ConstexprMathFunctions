@@ -1,6 +1,7 @@
 ﻿// ☕ Привет
 #pragma once
 
+
 namespace ConstexprMathFunctions
 {
 	namespace Common

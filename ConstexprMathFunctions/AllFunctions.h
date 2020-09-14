@@ -5,3 +5,4 @@
 #include "Function/X.h"
 #include "Function/Sum.h"
 #include "Function/Mul.h"
+#include "Function/Pow.h"

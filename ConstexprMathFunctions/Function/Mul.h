@@ -74,5 +74,8 @@ namespace ConstexprMathFunctions
 			}
 		};
 
+		template <int Value, class F>
+		using MulConst = Mul<Constant<Value>, F>;
+
 	}
 }

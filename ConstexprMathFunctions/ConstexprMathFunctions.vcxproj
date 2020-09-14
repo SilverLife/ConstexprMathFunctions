@@ -120,6 +120,7 @@
     <ClInclude Include="AllFunctions.h" />
     <ClInclude Include="Function\Constant.h" />
     <ClInclude Include="Function\Mul.h" />
+    <ClInclude Include="Function\Pow.h" />
     <ClInclude Include="Function\Sum.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="Function\X.h" />

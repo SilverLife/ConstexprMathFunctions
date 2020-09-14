@@ -36,6 +36,9 @@
     <ClInclude Include="AllFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Function\Pow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
