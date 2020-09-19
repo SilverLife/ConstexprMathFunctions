@@ -44,6 +44,9 @@ namespace ConstexprMathFunctions
 			static constexpr bool HasIdenticallyValue = GetHasIdenticallyValue();
 			static constexpr int  IdenticallyValue = F1::IdenticallyValue * F2::IdenticallyValue;
 
+			static constexpr bool HasSum = false;
+
+
 			static void Print()
 			{
 				if (HasIdenticallyValue)
@@ -63,13 +66,29 @@ namespace ConstexprMathFunctions
 				{
 					F1::Print();
 				}
-				else
+				else 
 				{
-					std::cout << "(";
-					F1::Print();
-					std::cout << " * ";
-					F2::Print();
-					std::cout << ")";
+					if constexpr (F1::HasSum && !F1::HasIdenticallyValue)
+					{
+						std::cout << "(";
+						F1::Print();
+						std::cout << ")";
+					}
+					else
+					{
+						F1::Print();
+					}
+					std::cout << "*";
+					if constexpr (F2::HasSum && !F2::HasIdenticallyValue)
+					{
+						std::cout << "(";
+						F2::Print();
+						std::cout << ")";
+					}
+					else
+					{
+						F2::Print();
+					}
 				}
 			}
 		};

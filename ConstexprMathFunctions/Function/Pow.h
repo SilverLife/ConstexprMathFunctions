@@ -25,6 +25,9 @@ namespace ConstexprMathFunctions
 			static constexpr bool HasIdenticallyValue = (Exp == 0);
 			static constexpr int  IdenticallyValue = 1;
 
+			static constexpr bool HasSum = false;
+
+
 			static void Print()
 			{
 				if constexpr (Exp == 0)

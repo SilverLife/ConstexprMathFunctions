@@ -19,6 +19,8 @@ namespace ConstexprMathFunctions
 			// true, если данная функция тождественно равна числу
 			static constexpr bool HasIdenticallyValue = true;
 			static constexpr int  IdenticallyValue = Value;
+
+			static constexpr bool HasSum = false;
 		};
 	}
 }

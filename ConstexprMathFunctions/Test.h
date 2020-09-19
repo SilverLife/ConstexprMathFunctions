@@ -70,8 +70,20 @@ namespace ConstexprMathFunctions
 
 	void Test3()
 	{
-		using F = Sum<X, Sum<Constant<3>, X>>;
+		using F = Sum<Constant<3>, Sum<Constant<4>, X>>;
+		//using F = Mul<Constant<3>, Mul<Constant<3>, Pow<2>>>;
 
-		Print<F>();
+		F::Print();
+		//F::Derivative::Print();
+		//Print<F>();
+	}
+
+	void Test4()
+	{
+		// (3 + x)^2
+		using Xplus3 = Sum<X, Constant<3>>;
+		using F = Sup<Pow<2>, Xplus3>;
+
+		F::Print();
 	}
 }
