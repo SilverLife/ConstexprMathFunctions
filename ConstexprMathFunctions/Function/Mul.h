@@ -42,7 +42,7 @@ namespace ConstexprMathFunctions
 			}
 
 			static constexpr bool HasIdenticallyValue = GetHasIdenticallyValue();
-			static constexpr int  IdenticallyValue = F1::IdenticallyValue * F2::IdenticallyValue;
+			static constexpr double  IdenticallyValue = F1::IdenticallyValue * F2::IdenticallyValue;
 
 			static constexpr bool HasSum = false;
 

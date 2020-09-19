@@ -7,3 +7,5 @@
 #include "Function/Mul.h"
 #include "Function/Pow.h"
 #include "Function/Sup.h"
+#include "Function/Sin.h"
+#include "Function/Cos.h"

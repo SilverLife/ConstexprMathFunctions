@@ -71,19 +71,32 @@ namespace ConstexprMathFunctions
 	void Test3()
 	{
 		using F = Sum<Constant<3>, Sum<Constant<4>, X>>;
-		//using F = Mul<Constant<3>, Mul<Constant<3>, Pow<2>>>;
 
 		F::Print();
-		//F::Derivative::Print();
-		//Print<F>();
 	}
 
 	void Test4()
 	{
-		// (3 + x)^2
-		using Xplus3 = Sum<X, Constant<3>>;
-		using F = Sup<Pow<2>, Xplus3>;
+		using Xmul2 = Mul<X, Constant<2>>;
+		using F = Sin<Cos<Xmul2>>;
+		
+		F::Print(); 
+		std::cout << std::endl;
+		F::Derivative::Print();
+		std::cout << std::endl;
+		F::Derivative::Derivative::Print();
+		std::cout << std::endl;
+	}
 
-		F::Print();
+	void Test5()
+	{
+		// (4x + sin(6x)) ^ 3
+		using Sin6x = Sin<MulConst<6, X>>;
+		using Base  = Sum<MulConst<4, X>, Sin6x>;
+		using F     = Pow<3, Base>;
+
+		F::Print();                         std::cout << std::endl;
+		F::Derivative::Print();             std::cout << std::endl;
+		F::Derivative::Derivative::Print(); std::cout << std::endl;
 	}
 }

@@ -119,8 +119,10 @@
     <ClInclude Include="Common\Common.h" />
     <ClInclude Include="AllFunctions.h" />
     <ClInclude Include="Function\Constant.h" />
+    <ClInclude Include="Function\Cos.h" />
     <ClInclude Include="Function\Mul.h" />
     <ClInclude Include="Function\Pow.h" />
+    <ClInclude Include="Function\Sin.h" />
     <ClInclude Include="Function\Sum.h" />
     <ClInclude Include="Function\Sup.h" />
     <ClInclude Include="Test.h" />

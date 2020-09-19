@@ -42,6 +42,12 @@
     <ClInclude Include="Function\Sup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Function\Sin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Function\Cos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">

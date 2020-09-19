@@ -22,7 +22,7 @@ namespace ConstexprMathFunctions
 			using Derivative = Sum<typename F1::Derivative, typename F2::Derivative>;
 
 			static constexpr bool HasIdenticallyValue = F1::HasIdenticallyValue && F2::HasIdenticallyValue;
-			static constexpr int  IdenticallyValue    = F1::IdenticallyValue + F2::IdenticallyValue;
+			static constexpr double  IdenticallyValue    = F1::IdenticallyValue + F2::IdenticallyValue;
 
 			static constexpr bool HasSum = !Common::IsIdenticallyZero<F1>() && !Common::IsIdenticallyZero<F2>();
 
