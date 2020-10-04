@@ -57,7 +57,6 @@ namespace ConstexprMathFunctions
 	void Test2()
 	{
 		// f(x) = x^4 + 3*x^3 + 5*x^2 + 3
-		//using F = SumMany<Constant<3>, Constant<4>>::F;
 		using F4 = Pow<4>;
 		using F3 = MulConst<3, Pow<3>>;
 		using F2 = MulConst<5, Pow<2>>;
@@ -70,22 +69,38 @@ namespace ConstexprMathFunctions
 
 	void Test3()
 	{
+		// f(x) = 3 + 4 + x
 		using F = Sum<Constant<3>, Sum<Constant<4>, X>>;
 
-		F::Print();
+		// Ожидаем печать без скобок, т.к. приоритет одинаковый
+		Print<F>();
 	}
 
 	void Test4()
 	{
-		using Xmul2 = Mul<X, Constant<2>>;
-		using F = Sin<Cos<Xmul2>>;
+		// f(x) = sin(2x)
+		using Xmul2 = MulConst<2, X>;
+		using F = Sin<Xmul2>;
 		
-		F::Print(); 
-		std::cout << std::endl;
-		F::Derivative::Print();
-		std::cout << std::endl;
-		F::Derivative::Derivative::Print();
-		std::cout << std::endl;
+		// f'(x) = 2*cos(2x)
+		using DerF = F::Derivative;
+		using TestDerF = MulConst<2, Cos<MulConst<2, X>>>;
+
+		static_assert(DerF::f(0) == TestDerF::f(0), "Incorrect value");
+		static_assert(DerF::f(0) != TestDerF::f(1), "Incorrect value");
+		static_assert(DerF::f(1) == TestDerF::f(1), "Incorrect value");
+		static_assert(DerF::f(2) == TestDerF::f(2), "Incorrect value");
+
+		// f''(x) = 4*sin(2x)
+		using DerDerF = DerF::Derivative;
+		using TestDerDerF = MulConst<4, Sin<MulConst<2, X>>>;
+
+		static_assert(DerDerF::f(0) == TestDerDerF::f(0), "Incorrect value");
+		static_assert(DerDerF::f(0) != TestDerDerF::f(1), "Incorrect value");
+		static_assert(DerDerF::f(1) == TestDerDerF::f(1), "Incorrect value");
+		static_assert(DerDerF::f(2) == TestDerDerF::f(2), "Incorrect value");
+		
+		Print<F>();
 	}
 
 	void Test5()
@@ -95,8 +110,6 @@ namespace ConstexprMathFunctions
 		using Base  = Sum<MulConst<4, X>, Sin6x>;
 		using F     = Pow<3, Base>;
 
-		F::Print();                         std::cout << std::endl;
-		F::Derivative::Print();             std::cout << std::endl;
-		F::Derivative::Derivative::Print(); std::cout << std::endl;
+		Print<F>();
 	}
 }

@@ -39,9 +39,6 @@
     <ClInclude Include="Function\Pow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Function\Sup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Function\Sin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
