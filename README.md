@@ -52,3 +52,5 @@ std::cout << "f''(x) = "; DerDerF::Print(); std::cout << std::endl;
  f'(x) = x + x + 3
 f''(x) = 2
 ```
+
+Остальные пример можно посмотреть в файле https://github.com/SilverLife/ConstexprMathFunctions/blob/master/ConstexprMathFunctions/Test.h
