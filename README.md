@@ -15,40 +15,37 @@ template <class F1, class F2> class Sum;         // f(x) = F1(x) + F2(x)
 template <class F1, class F2> class Mul;         // f(x) = F1(x) * F2(x)
 ```
 
-Примеры:
+Примеры использования:
+Т.к. все операции происходят на этапе компиляции, то будем оперировать типами (используя using).
+Хотим создать функцию `f(x) = x*x + 3*(2 + x)`. Делается это так:
 ```cpp
-void Test1()
-	{
-		// "Строим" на этапе компиляции функцию f(x) = x*x + 3*(2 + x)
-		using SqrX = Mul<X, X>;
-		using Xplus2mul3 = Mul< Constant<3>, Sum<Constant<2>, X> >;
+using SqrX = Mul<X, X>;
+using Xplus2mul3 = Mul< Constant<3>, Sum<Constant<2>, X> >;
 
-		// F - это тип, у которого есть статическая constexpr функция f
-		using F = Sum<SqrX, Xplus2mul3>;
+using F = Sum<SqrX, Xplus2mul3>;
+```
 
-		// Знаем на этапе компиляции, что f(2) == 12
-		static_assert(F::f(2) == 16, "Incorrect value");
+Итого имеем **тип** F, у которого есть static constexpr функция f(double x). 
+Можем на **этапе компиляции** это проверить: `static_assert(F::f(2) == 16, "Incorrect value");`
 
+Можем взять новый тип, который будет представлять *производную* этой функции.
+`using DerF = F::Derivative;`. Она равна `2*x + 3`
 
-		// Возьмем производную этой функции
-		// f'(x) = 2*x + 3
-		using DerF = F::Derivative;
+Аналогично можно проверить значение производной: `static_assert(DerF::f(2) == 7, "Incorrect value");`
 
-		// Знаем на этапе компиляции, что f'(2) == 7
-		static_assert(DerF::f(2) == 7, "Incorrect value");
+Брать производные можно бесконечно.
 
-		// Возьмем вторую производную этой функции
-		// f''(x) = 2
-		using DerDerF = DerF::Derivative;
+Также функцию можно вывести на экран. У всех функций есть статический метод Print();
+Например, для
+```cpp
+std::cout << "  f(x) = ";       F::Print(); std::cout << std::endl;
+std::cout << " f'(x) = ";    DerF::Print(); std::cout << std::endl;
+std::cout << "f''(x) = "; DerDerF::Print(); std::cout << std::endl;
+```
 
-		// Знаем на этапе компиляции, что f'(2) == 7
-		static_assert(DerDerF::f(2) == 2, "Incorrect value");
-
-		// Знаем на этапе компиляции, что f''(x) === 2
-		static_assert(DerDerF::HasIdenticallyValue, "DerDerF must be equal 2");
-		static_assert(DerDerF::IdenticallyValue == 2, "DerDerF must be equal 2");
-
-		// Ну а тут можно запустить прогу и посмотреть принты
-		Print<F>();
-	}
+Будет выведено:
+```
+  f(x) = x*x + 3*(2 + x)
+ f'(x) = x + x + 3
+f''(x) = 2
 ```
